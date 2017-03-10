@@ -24,14 +24,11 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private RecyclerView rv_better;
     private RecyclerView rv_feed_better;
     private RadioGroup rg_selecte;
-//    private CheckBox cb_consider_angle;
-//    private CheckBox cb_ignore_child_requests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i("TAG", View.VISIBLE + "--" + View.GONE);
         setUpActionBarAndDrawer();
 
         initRecylerView();
@@ -72,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.consider_angle, R.string.ignore_child_requests);
         drawerToggle.syncState();
+
+        drawerLayout.setDrawerListener(drawerToggle);
     }
 
     @Override
@@ -84,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         rv_feed_better.setVisibility(checkid == R.id.rb_feed_better?View.VISIBLE:View.GONE);
         rv_normal.setVisibility(checkid == R.id.rb_normal?View.VISIBLE:View.GONE);
 
-
-        Log.i("TAG",rv_normal.getVisibility()+"-----"+rv_better.getVisibility()+"-----"+rv_feed_better.getVisibility());
     }
 
 }
