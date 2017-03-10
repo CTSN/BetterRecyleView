@@ -55,18 +55,42 @@
             android:textSize="18sp"
             android:text="@string/settings"
             />
-        <CheckBox
-            android:id="@+id/cb_consider_angle"
+        <RadioGroup
+            android:id="@+id/rg_select"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/consider_angle"
-            />
-        <CheckBox
-            android:id="@+id/cb_ignore_child_requests"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ignore_child_requests"
-            />
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rb_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="normal"/>
+            <RadioButton
+                android:id="@+id/rb_better"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consider_angle"/>
+
+            <RadioButton
+                android:id="@+id/rb_feed_better"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ignore_child_requests"/>
+        </RadioGroup>
+        <!--<CheckBox-->
+            <!--android:id="@+id/cb_consider_angle"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/consider_angle"-->
+            <!--/>-->
+        <!--<CheckBox-->
+            <!--android:id="@+id/cb_ignore_child_requests"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/ignore_child_requests"-->
+            <!--/>-->
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

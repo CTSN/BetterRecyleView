@@ -1,5 +1,6 @@
 package com.roy.betterrecyleview;
 
+import android.support.annotation.IdRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +13,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private RecyclerView rv_normal;
     private RecyclerView rv_better;
     private RecyclerView rv_feed_better;
-    private CheckBox cb_consider_angle;
-    private CheckBox cb_ignore_child_requests;
+    private RadioGroup rg_selecte;
+//    private CheckBox cb_consider_angle;
+//    private CheckBox cb_ignore_child_requests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +36,15 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
         initRecylerView();
 
-        initCheckBox();
+        initRadioGroup();
     }
 
-    private void initCheckBox() {
-        cb_consider_angle = (CheckBox) findViewById(R.id.cb_consider_angle);
-        cb_ignore_child_requests = (CheckBox) findViewById(R.id.cb_ignore_child_requests);
+    private void initRadioGroup() {
 
-        cb_consider_angle.setOnCheckedChangeListener(this);
-        cb_ignore_child_requests.setOnCheckedChangeListener(this);
+        rg_selecte = (RadioGroup)findViewById(R.id.rg_select);
+
+        rg_selecte.setOnCheckedChangeListener(this);
+
     }
 
 
@@ -71,24 +75,17 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        int id = buttonView.getId();
-        switch (id){
-            case R.id.cb_consider_angle:
-                rv_better.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-                break;
-            case R.id.cb_ignore_child_requests:
-                rv_feed_better.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-                break;
-            default:
-                break;
-        }
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        initShowRecyler(checkedId);
+    }
 
-        if (rv_better.getVisibility() == View.GONE&&rv_feed_better.getVisibility() == View.GONE){
-            Log.i("TAG","---");
-            rv_normal.setVisibility(View.VISIBLE);
-        }
+    void initShowRecyler(int checkid){
+        rv_better.setVisibility(checkid == R.id.rb_better?View.VISIBLE:View.GONE);
+        rv_feed_better.setVisibility(checkid == R.id.rb_feed_better?View.VISIBLE:View.GONE);
+        rv_normal.setVisibility(checkid == R.id.rb_normal?View.VISIBLE:View.GONE);
 
+
+        Log.i("TAG",rv_normal.getVisibility()+"-----"+rv_better.getVisibility()+"-----"+rv_feed_better.getVisibility());
     }
 
 }
